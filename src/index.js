@@ -1,7 +1,37 @@
+import './style.css'
 function toDoItem (title,  description, date = new Date(), completed = false)  {
     return {title,  description, date, completed}
 }
 
+function displayItem(item) {
+   const container = document.createElement('div')
+   container.classList.add('item-container') 
+
+   const title = document.createElement('div')
+   container.classList.add('item-header') 
+   title.innerText=item.title
+   
+   const completed = document.createElement('input')
+   completed.classList.add('item-header') 
+   completed.setAttribute('type', "checkbox")
+   console.log(completed)
+   completed.checked = item.completed
+
+   const date = document.createElement('div')
+   date.classList.add('item-body') 
+   date.innerText = item.date
+
+   const description = document.createElement('div')
+   description.classList.add('item-body') 
+   description.innerText = item.description
+
+   container.appendChild(title)
+   container.appendChild(completed)
+   container.appendChild(description)
+   container.appendChild(date)
+
+   return container
+}
 
 function pageSetUp() {
     localStorage.clear()
@@ -33,4 +63,5 @@ function pageSetUp() {
     return mainBody 
 }
 
-document.body.appendChild(pageSetUp())
+let item = toDoItem("hi", "say hello", '101010', true)
+document.body.appendChild(displayItem(item))
